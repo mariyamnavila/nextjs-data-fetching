@@ -1,10 +1,18 @@
 import Link from 'next/link';
 import MealSearchInput from './components/MealSearchInput';
+import Image from 'next/image';
+import { Roboto } from "next/font/google";
 
 export const metadata = {
   title: "Meals Page",
   description: "Search and explore various meals using Next.js",
 };
+
+const roboto = Roboto({
+    weight: ["400", "700"],
+    subsets: ["latin"],
+    variable: "--font-roboto",
+});
 
 const MealsPage = async ({searchParams}) => {
     const query = await searchParams;
@@ -23,7 +31,7 @@ const MealsPage = async ({searchParams}) => {
     const meals = await fetchMeals();
 
     return (
-        <div>
+        <div className={`${roboto.variable} px-4 py-6`}>
             <h1 className='text-3xl font-bold mb-6'>Meals Page</h1>
 
             <div>
@@ -39,7 +47,7 @@ const MealsPage = async ({searchParams}) => {
                             meals.map(meal => (
                                 <div key={meal.idMeal} className='border p-4 m-4 rounded-lg shadow-lg'>
                                     <h2 className='text-2xl font-bold mb-2'>{meal.strMeal}</h2>
-                                    <img src={meal.strMealThumb} alt={meal.strMeal} className='w-full h-auto mb-2' />
+                                    <Image width={641} height={641} src={meal?.strMealThumb} alt={meal.strMeal} className='w-full h-auto mb-2' />
                                     <p className='text-sm'>{meal.strInstructions.substring(0, 100)}...</p>
                                     <Link href={`/meals/${meal.idMeal}`} className="text-blue-500 hover:underline mt-2 inline-block">View Details</Link>
                                 </div>
