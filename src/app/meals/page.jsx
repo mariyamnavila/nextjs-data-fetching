@@ -1,4 +1,10 @@
+import Link from 'next/link';
 import MealSearchInput from './components/MealSearchInput';
+
+export const metadata = {
+  title: "Meals Page",
+  description: "Search and explore various meals using Next.js",
+};
 
 const MealsPage = async ({searchParams}) => {
     const query = await searchParams;
@@ -35,6 +41,7 @@ const MealsPage = async ({searchParams}) => {
                                     <h2 className='text-2xl font-bold mb-2'>{meal.strMeal}</h2>
                                     <img src={meal.strMealThumb} alt={meal.strMeal} className='w-full h-auto mb-2' />
                                     <p className='text-sm'>{meal.strInstructions.substring(0, 100)}...</p>
+                                    <Link href={`/meals/${meal.idMeal}`} className="text-blue-500 hover:underline mt-2 inline-block">View Details</Link>
                                 </div>
                             ))
                         }

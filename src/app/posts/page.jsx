@@ -6,6 +6,11 @@ export const getPosts = async () => {
     return posts;
 }
 
+export const metadata = {
+  title: "All Posts",
+  description: "Loading all posts using Next.js data fetching methods",
+};
+
 const Posts = async () => {
     const posts = await getPosts();
     return (

@@ -6,6 +6,15 @@ export const getPostById = async (id) => {
     return post;
 }
 
+export async function generateMetadata({ params }) {
+    const { id } = await params;
+    const post = await getPostById(id);
+    return {
+        title: post.title,
+        description: post.body.substring(0, 150),
+    };
+}
+
 const SinglePost = async ({ params }) => {
     const { id } = await params;
     const post = await getPostById(id);
