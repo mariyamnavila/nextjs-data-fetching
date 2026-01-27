@@ -1,13 +1,15 @@
+import dbConnect from '@/lib/dbConnect';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import { getProducts } from '../actions/products/getProducts';
+
+// export const dynamic = 'force-dynamic';
 
 const ProductsPage = async () => {
-    const res = await fetch('http://localhost:3000/api/items', { cache: 'force-cache' });
-    const data = await res.json();
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/items`, { cache: 'force-cache' });
+    // const data = await res.json();
 
-    if (data.length > 3) {
-        redirect('/products/add');
-    }
+    const data = await getProducts();
 
     return (
         <div>

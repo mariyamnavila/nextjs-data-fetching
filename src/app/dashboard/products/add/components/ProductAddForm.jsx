@@ -1,4 +1,5 @@
 'use client';
+import { postSingleProduct } from "@/app/actions/products/postSingleProduct";
 import { useRouter } from "next/navigation";
 
 const ProductAddForm = () => {
@@ -12,14 +13,15 @@ const ProductAddForm = () => {
             price: formData.get('productPrice'),
             description: formData.get('productDescription'),
         };
-        const res = await fetch("http://localhost:3000/api/items", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(productData),
-        });
-        const result = await res.json();
+        // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/api/items`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(productData),
+        // });
+        // const result = await res.json();
+        const result = await postSingleProduct(productData);
         console.log("Product added:", result);
         form.reset()
         router.push('/products');
