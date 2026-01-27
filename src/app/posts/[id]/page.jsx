@@ -15,7 +15,7 @@ const SinglePost = async ({ params }) => {
             <h1>Single Post</h1>
             <p>Post ID: {id}</p>
             <p className='text-xl font-bold'>Post Title: {post.title}</p>
-            <p className='text-lg '>Post Body: {post.body}</p>
+            <p className='text-lg test-class'>Post Body: {post.body}</p>
         </div>
     );
 };
