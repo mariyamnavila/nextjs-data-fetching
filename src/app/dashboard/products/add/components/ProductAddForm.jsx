@@ -1,6 +1,8 @@
 'use client';
+import { useRouter } from "next/navigation";
 
 const ProductAddForm = () => {
+    const router = useRouter();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -20,6 +22,8 @@ const ProductAddForm = () => {
         const result = await res.json();
         console.log("Product added:", result);
         form.reset()
+        router.push('/products');
+        router.refresh();
     }
     return (
         <div>
