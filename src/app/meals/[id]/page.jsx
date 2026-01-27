@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 export const getMealById = async (id) => {
@@ -23,7 +24,7 @@ const SingleMealPage = async ({ params }) => {
             <h1>Single Meal</h1>
             <p>Meal ID: {id}</p>
             <p className='text-xl font-bold'>Meal Name: {meal.strMeal}</p>
-            <img src={meal.strMealThumb} alt={meal.strMeal} className='w-full h-[400px] object-cover mb-2' />
+            <Image width={641} height={641} src={meal.strMealThumb} alt={meal.strMeal} className='w-full h-100 object-cover mb-2' />
             <p className='text-lg'>{meal.strInstructions}</p>
         </div>
     );
