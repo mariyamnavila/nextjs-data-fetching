@@ -1,10 +1,10 @@
 'use server'
 
-import dbConnect from "@/lib/dbConnect"
+import dbConnect, { collectionNames } from "@/lib/dbConnect"
 
 export async function registerUser(userInfo) {
     try {
-        const result = await dbConnect('test-users').insertOne(userInfo)
+        const result = await dbConnect(collectionNames.TEST_USERS).insertOne(userInfo)
         return result
     } catch (error) {
         console.log(error);

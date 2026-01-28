@@ -1,5 +1,4 @@
-import dbConnect from '@/lib/dbConnect';
-import { redirect } from 'next/navigation';
+
 import React from 'react';
 import { getProducts } from '../actions/products/getProducts';
 
