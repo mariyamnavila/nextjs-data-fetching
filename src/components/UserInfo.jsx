@@ -8,7 +8,7 @@ const UserInfo = () => {
         <div>
             {session.data && (
                 <div>
-                    <p>Name: {session.data.user.name}</p>
+                    <p>Name: {session.data.user.username}</p>
                     <p>Email: {session.data.user.email}</p>
                 </div>
             )}

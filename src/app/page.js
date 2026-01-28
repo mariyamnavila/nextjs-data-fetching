@@ -71,9 +71,10 @@ export default async function Home() {
           <>
             <p className="font-bold text-xl">From Server component</p>
             <div>
-              <p>Name: {session.user.name}</p>
+              <p>Name: {session.user.username}</p>
               <p>Email: {session.user.email}</p>
             </div>
+            {/* {JSON.stringify(session)} */}
           </>
         )}
       </main>

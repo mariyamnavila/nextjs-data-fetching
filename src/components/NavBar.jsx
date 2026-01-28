@@ -25,6 +25,9 @@ const NavBar = () => {
                         <Link href={'/products/add'}>
                             <li>Add Product</li>
                         </Link>
+                        <Link href={'/register'}>
+                            <li>Register</li>
+                        </Link>
                     </ul>
                 </nav>
             </div>
