@@ -1,14 +1,15 @@
 import dbConnect, { collectionNames } from "./dbConnect";
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "jsmith" },
+                username: { label: "Username", type: "text", placeholder: "Your username" },
                 password: { label: "Password", type: "password" },
-                email: { label: "Email", type: "email" }
+                email: { label: "Email", type: "email", placeholder: "Your email" }
             },
 
             async authorize(credentials, req) {
@@ -28,7 +29,11 @@ export const authOptions = {
                     return null
                 }
             }
-        })
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        }),
     ],
     callbacks: {
         async session({ session, token, user }) {

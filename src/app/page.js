@@ -1,4 +1,5 @@
 import LoginButton from "@/components/LoginButton";
+import LogOutButton from "@/components/LogOutButton";
 import UserInfo from "@/components/UserInfo";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
@@ -63,7 +64,12 @@ export default async function Home() {
           >
             Documentation
           </a>
-          <LoginButton />
+          {
+            session ? <p>Signed in as {session.user.username}</p> : <p>Not signed in</p>
+          }
+          {
+            session?.user ? <LogOutButton /> : <LoginButton />
+          }
         </div>
         <p className="font-bold text-xl">From Client component</p>
         <UserInfo></UserInfo>
