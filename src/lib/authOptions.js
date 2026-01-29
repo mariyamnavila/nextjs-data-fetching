@@ -1,6 +1,7 @@
 import dbConnect, { collectionNames } from "./dbConnect";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 
 export const authOptions = {
     providers: [
@@ -34,11 +35,32 @@ export const authOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID,
+            clientSecret: process.env.GITHUB_SECRET
+        })
     ],
     callbacks: {
+        async signIn({ user, account, profile, email, credentials }) {
+            if (account) {
+                try {
+                    const { providerAccountId, provider } = account
+                    const { email: user_email, image, name } = user
+                    const payload = { role: 'user', providerAccountId, provider, user_email, image, name }
+
+                    const userCollection = dbConnect(collectionNames.TEST_USERS)
+                    const isUserExists = await userCollection.findOne({ providerAccountId: providerAccountId });
+                    if (!isUserExists) {
+                        await userCollection.insertOne(payload);
+                    }
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            }
+            return true;
+        },
         async session({ session, token, user }) {
-            // Send properties to the client, like an access_token from a provider.
-            // session.user.id = token.id;
             if (token) {
                 session.user.username = token.username;
                 session.user.role = token.role;

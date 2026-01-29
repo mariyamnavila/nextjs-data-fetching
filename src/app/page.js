@@ -65,7 +65,7 @@ export default async function Home() {
             Documentation
           </a>
           {
-            session ? <p>Signed in as {session.user.username}</p> : <p>Not signed in</p>
+            session ? <p>Signed in as {session.user.name}</p> : <p>Not signed in</p>
           }
           {
             session?.user ? <LogOutButton /> : <LoginButton />
@@ -77,7 +77,7 @@ export default async function Home() {
           <>
             <p className="font-bold text-xl">From Server component</p>
             <div>
-              <p>Name: {session.user.username}</p>
+              <p>Name: {session.user.name}</p>
               <p>Email: {session.user.email}</p>
             </div>
             {/* {JSON.stringify(session)} */}
